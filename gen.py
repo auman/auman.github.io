@@ -1,5 +1,7 @@
 
 import os
+import ntpath
+from PIL import Image
 
 tpl = """
 <!DOCTYPE html>
@@ -23,8 +25,12 @@ def main():
 
     files = os.listdir('i')
     data = ''
-    for f in files:
-        data += '<div style="float: left;margin: 6px;"><a href="./i/{}" target="_blank"><img src="./i/{}" width="200px"></div>'.format(f, f)
+    for f in sorted(files, key=lambda x: int(x[:-4])):
+        im = Image.open(os.path.join('i', f))
+        im.thumbnail([160, 160])
+        thumb_path = os.path.join('thumbs', ntpath.basename(f))
+        im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
+        data += '<div style="float: left;margin: 6px;"><a href="./i/{}" target="_blank"><img src="./thumbs/{}" width="160px"></div>'.format(f, f)
 
     print(tpl.format(data))
 
