@@ -16,6 +16,25 @@ h1 {{color:#FF6600;}}
 h2 {{text-align:center;}}
 .col {{float:left;width:172px;background-color:#dddddd;}}
 </style>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+$(document).ready(function() {{
+	$("a[href$='.jpg']").attr('rel', 'gallery').fancybox({{
+                'padding': 6,
+	}});
+}});
+</script>
+<script>
+(function(i,s,o,g,r,a,m){{i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){{
+(i[r].q=i[r].q||[]).push(arguments)}},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+}})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57878382-1', 'auto');
+ga('send', 'pageview');
+</script>
 </head>
 
 <body>
@@ -25,16 +44,6 @@ h2 {{text-align:center;}}
 {}
 </div>
 </body>
-<script>
-  (function(i,s,o,g,r,a,m){{i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){{
-  (i[r].q=i[r].q||[]).push(arguments)}},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  }})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-57878382-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
 </html>
 
 """
@@ -53,7 +62,7 @@ def main():
         im.thumbnail([160, 160])
         thumb_path = os.path.join('thumbs', ntpath.basename(f))
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
-        cols[col] += '<a href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/>'.format(f, f)
+        cols[col] += '<a rel="item-{}" href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/>'.format(total, f, f)
 
     data = '</div><div class="col">'.join(cols)
     data = '<div class="col">{}</div>'.format(data)
