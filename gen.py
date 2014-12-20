@@ -10,6 +10,10 @@ tpl = """
 <head>
 <title>Предновогодний пруфтред 2014-2015</title>
 <meta charset="UTF-8">
+<style>
+body {{background-color:#dddddd;}}
+h1 {{color:#FF6600;}}
+</style>
 </head>
 
 <body>
