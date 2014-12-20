@@ -77,7 +77,7 @@ def main():
         im.thumbnail([160, 160])
         thumb_path = os.path.join('thumbs', os.path.basename(f))
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
-        cols[col] += '<a href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/>'.format(f, f)
+        cols[col] += '<a href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/></a>'.format(f, f)
 
     data = '</div><div class="col">'.join(cols)
     data = '<div class="col">{}</div>'.format(data)
