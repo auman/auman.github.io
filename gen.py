@@ -11,9 +11,10 @@ tpl = """
 <title>Предновогодний пруфтред 2014-2015</title>
 <meta charset="UTF-8">
 <style>
-body {{background-color:#dddddd;}}
+body {{background-color:#eee;}}
 h1 {{color:#FF6600;}}
 h2 {{text-align:center;}}
+.col {{float:left;width:172px;background-color:#dddddd;}}
 </style>
 </head>
 
@@ -45,8 +46,8 @@ def main():
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
         cols[col] += '<a href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/>'.format(f, f)
 
-    data = '</div><div style="float:left;width:180px;">'.join(cols)
-    data = '<div style="float:left;width:180px;">{}</div>'.format(data)
+    data = '</div><div class="col">'.join(cols)
+    data = '<div class="col">{}</div>'.format(data)
     print(tpl.format(total, data))
 
 if __name__ == '__main__':
