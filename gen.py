@@ -17,6 +17,7 @@ h2 {{text-align:center;}}
 .col {{float:left;width:172px;background-color:#dddddd;}}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.12/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
 
@@ -24,6 +25,7 @@ h2 {{text-align:center;}}
 $(document).ready(function() {{
 	$("a[href$='.jpg']").attr('rel', 'gallery').fancybox({{
                 'padding': 6,
+                'loop': true
 	}});
 }});
 </script>
