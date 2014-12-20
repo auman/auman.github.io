@@ -1,6 +1,5 @@
 
 import os
-import ntpath
 from itertools import cycle
 from PIL import Image
 
@@ -62,9 +61,9 @@ def main():
         total += 1
         im = Image.open(os.path.join('i', f))
         im.thumbnail([160, 160])
-        thumb_path = os.path.join('thumbs', ntpath.basename(f))
+        thumb_path = os.path.join('thumbs', os.path.basename(f))
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
-        cols[col] += '<a rel="item-{}" href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/>'.format(total, f, f)
+        cols[col] += '<a href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/>'.format(f, f)
 
     data = '</div><div class="col">'.join(cols)
     data = '<div class="col">{}</div>'.format(data)
