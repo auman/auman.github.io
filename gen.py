@@ -14,6 +14,8 @@ body {{background-color:#eee;}}
 h1 {{color:#FF6600;}}
 h2 {{text-align:center;}}
 .col {{float:left;width:172px;background-color:#dddddd;}}
+.cell {{margin:6px;}}
+.cell span {{ position:absolute;font-weight:bold;color:gold;text-decoration:none;margin: 1px 0px 0px 4px;text-shadow: black 0.1em 0.1em 0.2em; }}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.12/jquery.mousewheel.min.js"></script>
@@ -78,7 +80,12 @@ def main():
         im.thumbnail([160, 160])
         thumb_path = os.path.join('thumbs', os.path.basename(f))
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
-        cols[col] += '<a href="./i/{}" style="display:block;margin:6px;" target="_blank"><img src="./thumbs/{}" width="160px"/></a>'.format(f, f)
+        cols[col] += '''<div class="cell">
+                            <a href="./i/{1}" target="_blank">
+                                <span>{0}</span>
+                                <img src="./thumbs/{1}" width="160px"/>
+                            </a>
+                        </div>'''.format(total, f)
 
     data = '</div><div class="col">'.join(cols)
     data = '<div class="col">{}</div>'.format(data)
