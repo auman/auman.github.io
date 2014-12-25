@@ -77,7 +77,11 @@ def main():
             sorted(files, key=lambda x: int(x[:-4]))):
         total += 1
         im = Image.open(os.path.join('i', f))
-        im.thumbnail([160, 160])
+        width, height = im.size
+        if height > width:
+            im.thumbnail([160, 160 / (width / height)])
+        else:
+            im.thumbnail([160, 160])
         thumb_path = os.path.join('thumbs', os.path.basename(f))
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
         cols[col] += '''<div class="cell">
