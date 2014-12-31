@@ -127,4 +127,5 @@ models = {
      126: 'Alfa Romeo 159',
      127: '',
      128: 'Honda CR-V (2001)',
+     129: 'Toyota Auris',
 }
