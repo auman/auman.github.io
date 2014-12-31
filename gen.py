@@ -90,7 +90,7 @@ def main():
                                 <span>{0}</span>
                                 <img src="./thumbs/{1}" width="160px"/>
                             </a>
-                        </div>'''.format(total, f)
+                        </div>'''.format(total - 2, f)
 
     data = '</div><div class="col">'.join(cols)
     data = '<div class="col">{}</div>'.format(data)
