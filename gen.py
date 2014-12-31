@@ -2,6 +2,7 @@
 import os
 from itertools import cycle
 from PIL import Image
+from meta import models
 
 tpl = """
 <!DOCTYPE html>
@@ -15,6 +16,7 @@ h1 {{color:#FF6600;}}
 h2 {{text-align:center;}}
 .col {{float:left;width:172px;background-color:#dddddd;}}
 .cell {{margin:6px;}}
+.cell p {{margin: 0px 0px 3px 0px;text-align:center;}}
 .cell span {{ position:absolute;font-weight:bold;color:gold;text-decoration:none;margin: 1px 0px 0px 4px;text-shadow: black 0.1em 0.1em 0.2em; }}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -26,7 +28,11 @@ h2 {{text-align:center;}}
 $(document).ready(function() {{
 	$("a[href$='.jpg']").attr('rel', 'gallery').fancybox({{
                 'padding': 6,
-                'loop': true
+                'loop': true,
+                helpers		: {{
+			title	: {{ type : 'inside' }},
+			buttons	: {{}}
+                }}
 	}});
 }});
 </script>
@@ -86,13 +92,21 @@ def main():
             im.thumbnail([160, 160])
         thumb_path = os.path.join('thumbs', os.path.basename(f))
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
-        if total < count_files - 2:
+        if total < count_files - 1:
+            label = models.get(total)
+            if label:
+                label = '<p>{}</p>'.format(label)
+                title = 'title="{}"'.format(label)
+            else:
+                label = ''
+                title = ''
             cols[col] += '''<div class="cell">
-                            <a href="./i/{1}" target="_blank">
+                            <a href="./i/{1}" target="_blank" {3}>
                                 <span>{0}</span>
                                 <img src="./thumbs/{1}" width="160px"/>
+                                {2}
                             </a>
-                        </div>'''.format(total, f)
+                        </div>'''.format(total, f, label, title)
         else:
             cols[col] += '''<div class="cell">
                             <a href="./i/{0}" target="_blank">
