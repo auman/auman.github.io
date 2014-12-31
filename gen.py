@@ -74,6 +74,7 @@ def main():
     files = os.listdir('i')
     cols = ['',] * COLS_COUNT
     total = 0
+    count_files = len(files)
     for col, f in zip(cycle(range(COLS_COUNT)),
             sorted(files, key=lambda x: int(x[:-4]))):
         total += 1
@@ -85,16 +86,24 @@ def main():
             im.thumbnail([160, 160])
         thumb_path = os.path.join('thumbs', os.path.basename(f))
         im.save(thumb_path, 'JPEG', quality=80, optimize=True, progressive=True)
-        cols[col] += '''<div class="cell">
+        if total < count_files - 2:
+            cols[col] += '''<div class="cell">
                             <a href="./i/{1}" target="_blank">
                                 <span>{0}</span>
                                 <img src="./thumbs/{1}" width="160px"/>
                             </a>
-                        </div>'''.format(total - 2, f)
+                        </div>'''.format(total, f)
+        else:
+            cols[col] += '''<div class="cell">
+                            <a href="./i/{0}" target="_blank">
+                                <img src="./thumbs/{0}" width="160px"/>
+                            </a>
+                        </div>'''.format(f)
+
 
     data = '</div><div class="col">'.join(cols)
     data = '<div class="col">{}</div>'.format(data)
-    print(tpl.format(total, data))
+    print(tpl.format(total - 2, data))
 
 if __name__ == '__main__':
     main()
