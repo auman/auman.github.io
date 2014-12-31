@@ -128,4 +128,6 @@ models = {
      127: '',
      128: 'Honda CR-V (2001)',
      129: 'Toyota Auris',
+     130: '',
+     131: 'Ford Escort mkIV (1988)',
 }
