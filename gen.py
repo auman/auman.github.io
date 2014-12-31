@@ -75,6 +75,8 @@ ga('send', 'pageview');
 
 COLS_COUNT = 5
 
+SKIP = (124,)
+
 def main():
 
     files = os.listdir('i')
@@ -84,6 +86,8 @@ def main():
     for col, f in zip(cycle(range(COLS_COUNT)),
             sorted(files, key=lambda x: int(x[:-4]))):
         total += 1
+        if total in SKIP:
+            continue
         im = Image.open(os.path.join('i', f))
         width, height = im.size
         if height > width:
